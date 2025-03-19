@@ -1,14 +1,22 @@
 import streamlit as st
 import datetime
+import os
 
 
 def save_data(client_name, client_birthday, client_type):
-    if client_name:
-        with open('../clients.csv', "a", encoding="utf-8") as file:
-            file.write(f"{client_name},{client_birthday.strftime("%d/%m/%Y")},{client_type}\n")
-        st.session_state["success"] = True
-    else:
-        st.session_state["success"] = False
+    file_path = '../clients.csv'
+    
+    file_exists = os.path.isfile(file_path)
+    
+    with open(file_path, "a", encoding="utf-8") as file:
+        if not file_exists:
+            file.write("Nome;Data de nascimento;Tipo\n")
+        
+        if client_name:
+            file.write(f"{client_name};{client_birthday.strftime('%d/%m/%Y')};{client_type}\n")
+            st.session_state["success"] = True
+        else:
+            st.session_state["success"] = False
 
 st.title("Cadastro de clientes")
 st.divider()
