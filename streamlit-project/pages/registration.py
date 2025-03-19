@@ -3,23 +3,12 @@ import datetime
 
 
 def save_data(client_name, client_birthday, client_type):
-    file_path = '../clients.csv'
-    
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            first_line = file.readline().strip()
-    except FileNotFoundError:
-        first_line = ""
-    
-    with open(file_path, "a", encoding="utf-8") as file:
-        if first_line != "Nome;Data de nascimento;Tipo":
-            file.write("Nome;Data de nascimento;Tipo\n")
-        
-        if client_name:
-            file.write(f"{client_name};{client_birthday.strftime('%d/%m/%Y')};{client_type}\n")          
-            st.session_state["success"] = True
-        else:
-            st.session_state["success"] = False
+    if client_name:
+        with open('../clients.csv', "a", encoding="utf-8") as file:
+            file.write(f"{client_name},{client_birthday.strftime("%d/%m/%Y")},{client_type}\n")
+        st.session_state["success"] = True
+    else:
+        st.session_state["success"] = False
 
 st.title("Cadastro de clientes")
 st.divider()
