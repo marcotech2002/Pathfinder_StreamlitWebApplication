@@ -1,19 +1,28 @@
 import streamlit as st
 import datetime
-import os
 
 
 def save_data(client_name, client_birthday, client_type):
     file_path = '../clients.csv'
     
-    file_exists = os.path.isfile(file_path)
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            first_line = file.readline().strip()
+    except FileNotFoundError:
+        first_line = ""
     
     with open(file_path, "a", encoding="utf-8") as file:
-        if not file_exists:
+        # Se o arquivo estiver vazio ou sem cabeçalho, escreve o cabeçalho
+        if first_line != "Nome;Data de nascimento;Tipo":
             file.write("Nome;Data de nascimento;Tipo\n")
         
+        # Escreve os dados do cliente
         if client_name:
             file.write(f"{client_name};{client_birthday.strftime('%d/%m/%Y')};{client_type}\n")
+            
+            # Adiciona uma linha em branco para novas inserções
+            file.write("\n")
+            
             st.session_state["success"] = True
         else:
             st.session_state["success"] = False
