@@ -12,11 +12,9 @@ def save_data(client_name, client_birthday, client_type):
         first_line = ""
     
     with open(file_path, "a", encoding="utf-8") as file:
-        # Se o arquivo estiver vazio ou sem cabeçalho, escreve o cabeçalho
         if first_line != "Nome;Data de nascimento;Tipo":
             file.write("Nome;Data de nascimento;Tipo\n")
         
-        # Escreve os dados do cliente
         if client_name:
             file.write(f"{client_name};{client_birthday.strftime('%d/%m/%Y')};{client_type}\n")          
             st.session_state["success"] = True
