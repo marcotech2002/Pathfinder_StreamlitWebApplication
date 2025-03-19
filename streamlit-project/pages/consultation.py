@@ -8,7 +8,7 @@ try:
         first_line = file.readline().strip()
 except FileNotFoundError:
     with open(file_path, "a", encoding="utf-8") as file:
-        file.write("Nome;Data de nascimento;Tipo\n")
+        file.write("Nome,Data de nascimento,Tipo\n")
     
 data = pd.read_csv(file_path)
 
