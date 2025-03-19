@@ -18,11 +18,7 @@ def save_data(client_name, client_birthday, client_type):
         
         # Escreve os dados do cliente
         if client_name:
-            file.write(f"{client_name};{client_birthday.strftime('%d/%m/%Y')};{client_type}\n")
-            
-            # Adiciona uma linha em branco para novas inserções
-            file.write("\n")
-            
+            file.write(f"{client_name};{client_birthday.strftime('%d/%m/%Y')};{client_type}\n")          
             st.session_state["success"] = True
         else:
             st.session_state["success"] = False
