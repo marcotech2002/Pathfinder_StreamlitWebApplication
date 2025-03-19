@@ -4,7 +4,7 @@ import datetime
 
 def save_data(client_name, client_birthday, client_type):
     if client_name:
-        with open('clients.csv', "a", encoding="utf-8") as file:
+        with open('../clients.csv', "a", encoding="utf-8") as file:
             file.write(f"{client_name},{client_birthday.strftime("%d/%m/%Y")},{client_type}\n")
         st.session_state["success"] = True
     else:

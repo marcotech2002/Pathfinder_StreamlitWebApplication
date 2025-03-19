@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 
-data = pd.read_csv("clients.csv")
+data = pd.read_csv("../clients.csv")
 
 st.title("Clientes cadastrados")
 st.divider()
